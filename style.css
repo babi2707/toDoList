@@ -50,8 +50,9 @@ h1 {
 }
 
 #add-todo-form button:hover {
-    background-color: rgb(185, 217, 247);
-    border-color: rgb(19, 19, 218);
+    background-color: rgb(129, 129, 231);
+    border-color: rgb(72, 72, 194);
+    color: white;
     border-radius: 10px;
     margin-left: 3px;
     margin-top: 0px;
