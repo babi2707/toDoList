@@ -1,7 +1,7 @@
 import { db, collection, addDoc, onSnapshot, doc, getDoc, updateDoc, deleteDoc } from "./firebase.js";
 
 function getItems() {
-  onSnapshot(collection(db, "todo-items"), (snapshot) => {
+  onSnapshot(collection(db, "new-todo"), (snapshot) => {
     let items = [];
     snapshot.docs.forEach((doc) => {
       items.push({
@@ -85,7 +85,7 @@ function createEventListener() {
     button.addEventListener("click", function() {
       const itemId = button.dataset.id;
       const listItem = button.closest(".list");
-      const itemRef = doc(collection(db, "todo-items"), itemId);
+      const itemRef = doc(collection(db, "new-todo"), itemId);
 
       // Obter dados do documento
       getDoc(itemRef)
@@ -121,7 +121,7 @@ function createEventListener() {
     button.addEventListener("click", function() {
       const itemId = button.dataset.id;
       const listItem = button.closest(".list");
-      const itemRef = doc(collection(db, "todo-items"), itemId);
+      const itemRef = doc(collection(db, "new-todo"), itemId);
 
       // Remover item do Firestore
       deleteDoc(itemRef)
@@ -137,7 +137,7 @@ function createEventListener() {
 }
 
 function markCompleted(id) {
-  let item = doc(collection(db, "todo-items"), id);
+  let item = doc(collection(db, "new-todo"), id);
 
   getDoc(item).then(function(doc) {
     if (doc.exists) {
@@ -160,7 +160,7 @@ function clearCompletedItems() {
   checkedItems.forEach((item) => {
     const listItem = item.closest(".list");
     const itemId = item.dataset.id;
-    const itemRef = doc(collection(db, "todo-items"), itemId);
+    const itemRef = doc(collection(db, "new-todo"), itemId);
 
     // Remover item do Firestore
     deleteDoc(itemRef)
@@ -191,7 +191,7 @@ window.onload = () => {
     };
 
     try {
-      await addDoc(collection(db, "todo-items"), {
+      await addDoc(collection(db, "new-todo"), {
         name: todo.name,
         description: todo.description,
         startDate: todo.startdatetime,

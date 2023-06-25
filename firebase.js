@@ -4,13 +4,13 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.23.0/firebase
 import { getFirestore, collection, addDoc, onSnapshot, doc, getDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBUkPCCXFi99DW2UPnyMAJpFKtqDBLo2e4",
-  authDomain: "todo-barbara.firebaseapp.com",
-  projectId: "todo-barbara",
-  storageBucket: "todo-barbara.appspot.com",
-  messagingSenderId: "839368344937",
-  appId: "1:839368344937:web:35e93af088660b0b34e9f8",
-  measurementId: "G-2ZM4RFHQLY",
+  apiKey: "AIzaSyAeYXSaf7CLNCvdOXLNvOmb29D_UK9qqNk",
+  authDomain: "newtodo-776c3.firebaseapp.com",
+  projectId: "newtodo-776c3",
+  storageBucket: "newtodo-776c3.appspot.com",
+  messagingSenderId: "683413439169",
+  appId: "1:683413439169:web:499778a1bf3b4391680a40",
+  measurementId: "G-53YZC7Z9KG"
 };
 
 
