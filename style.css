@@ -1,0 +1,242 @@
+body {
+    background-color: azure;
+}
+
+.container {
+    margin-top: 30px;
+    width: 100%;
+    max-width: 950px;
+    align-items: center;
+    text-align: center;
+}
+
+h1 {
+    font-family: cursive;
+    letter-spacing: 5px;
+    font-size: 80px;
+    font-weight: bold;
+    color: rgb(19, 19, 218);
+    text-align: center;
+}
+
+#add-todo-form input {
+    border-color: rgb(19, 19, 218);
+    border-radius: 10px;
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+#add-todo-form input:hover {
+    background-color: rgb(185, 229, 247);
+    border-color: rgb(19, 19, 218);
+    border-radius: 10px;
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+#add-todo-form button {
+    background-color: rgb(185, 229, 247);
+    border-color: rgb(19, 19, 218);
+    border-radius: 10px;
+    margin-left: 3px;
+    margin-top: 0px;
+    margin-bottom: 4px;
+    flex-shrink: 0;
+    width: auto;
+}
+
+#add-todo-form button:hover {
+    background-color: rgb(185, 217, 247);
+    border-color: rgb(19, 19, 218);
+    border-radius: 10px;
+    margin-left: 3px;
+    margin-top: 0px;
+    margin-bottom: 4px;
+    flex-shrink: 0;
+    width: auto;
+}
+
+.newToDo {
+    height: 40px;
+}
+
+.newToDo-input {
+    flex-grow: 1;
+    align-items: center;
+}
+
+.newToDo-input form {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+
+#lista {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 1px;
+    border-color: rgb(19, 19, 218);
+    border-style: solid;
+    border-radius: 10px;
+    border-width: thin;
+    padding: 8px;
+    overflow: hidden;
+    box-shadow: 0px 2px 30px 0px rgb(0, 0, 0, 0.45);
+    background-color: rgba(151, 196, 196, 0.651);
+    transition: all 0.25s ease;
+}
+
+#lista:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0px 7px 0px rgb(0, 0, 0, 0.45);
+    border-color: rgb(83, 83, 173);
+}
+
+#lista:first-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 30px;
+    border-color: rgb(19, 19, 218);
+    border-style: solid;
+    border-radius: 10px;
+    border-width: thin;
+    padding: 8px;
+    overflow: hidden;
+    box-shadow: 0px 2px 30px 0px rgb(0, 0, 0, 0.45);
+    background-color: rgba(151, 196, 196, 0.651);
+    transition: all 0.25s ease;
+}
+
+#lista:first-of-type:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0px 7px 0px rgb(0, 0, 0, 0.45);
+    border-color: rgb(83, 83, 173);
+}
+
+#lista:last-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 1px;
+    border-color: rgb(19, 19, 218);
+    border-style: solid;
+    border-radius: 10px;
+    border-width: thin;
+    padding: 8px;
+    overflow: hidden;
+    box-shadow: 0px 2px 30px 0px rgb(0, 0, 0, 0.45);
+    background-color: rgba(151, 196, 196, 0.651);
+}
+
+#lista:last-of-type:hover {
+    transform: translateY(0px);
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.col-1 {
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.col-11 {
+    width: 90%;
+}
+
+.texto {
+    margin-left: 2px;
+}
+
+.texto span {
+    justify-content: space-between !important;
+    margin: 0 2px;
+}
+
+.texto span:first-of-type {
+    text-align: start !important; 
+}
+
+.texto span:last-of-type {
+    text-align: end !important;
+}
+
+p {
+    margin: 0px;
+}
+
+.check {
+    width: px;
+}
+
+.check-mark {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid rgb(19, 19, 218);
+    cursor: pointer;
+    transform: all 0.25s;
+}
+
+.check-mark i {
+    visibility: hidden;
+}
+
+.check-mark:hover, .check-mark.checked {
+    border-color: linear-gradient(135deg, #55DDFF 0%, #C058F3 100%);
+    background: linear-gradient(135deg, #55DDFF 0%, #C058F3 100%);   
+}
+
+.check-mark:hover i, .check-mark.checked i {
+    visibility: visible;
+}
+
+.texto.checked {
+    text-decoration: line-through;
+    color: rgb(108, 154, 238);
+}
+
+
+#items-info {
+    justify-content: space-between;
+}
+
+.items-statuses span:hover, .items-statuses span.active, .items-clear:hover {
+    color:rgb(19, 19, 218);
+    cursor: pointer;
+}
+
+.items-left {
+    text-align: start;
+}
+
+.items-clear{
+    cursor: pointer;
+    text-align: end;
+}
+
+.edit-button {
+    border: none;
+    background: none;
+}
+
+.delete-button {
+    border: none;
+    background: none;
+}
+
+#botoes {
+    justify-content: end;
+    text-align: end;
+}
