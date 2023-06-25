@@ -1,8 +1,10 @@
 import { db, collection, addDoc, onSnapshot, doc, getDoc, updateDoc, deleteDoc } from "./firebase.js";
 
+let items = [];
+
 function getItems() {
   onSnapshot(collection(db, "new-todo"), (snapshot) => {
-    let items = [];
+    items = []; // Clear the items array before populating it
     snapshot.docs.forEach((doc) => {
       items.push({
         id: doc.id,
@@ -14,17 +16,15 @@ function getItems() {
 }
 
 function generateItems(items) {
-
   let itemsHTML = "";
   let count = 0;
 
   items.forEach((item) => {
     let date = new Date(item.startDate);
     let dateEnd = new Date(item.endDate);
-    console.log(item);
     itemsHTML += `
         <div class="list" id="lista">
-          <div class="row">
+          <div class="row" data-id="${item.id}">
             <div class="col-1" id="item">
               <div class="check">
                 <div data-id="${item.id}" class="check-mark ${item.status == "completed" ? "checked" : ""}">
@@ -54,7 +54,6 @@ function generateItems(items) {
 
     if (item.status == "completed") {
       count += 1;
-      console.log(count);
     }
   });
 
@@ -70,6 +69,101 @@ function generateItems(items) {
   createEventListener();
 }
 
+function editItem(item) {
+  let itemDiv = document.querySelector(`.list [data-id="${item.id}"]`);
+
+  if (itemDiv) {
+    let itemHTML = `
+      <form id="edit-todo-form" method="post">
+        <input type="text" id="todo-name" placeholder="Name" value="${item.name}" required />
+        <input type="text" id="todo-description" placeholder="Description" value="${item.description}" required />
+        <input type="datetime-local" id="todo-startdatetime" value="${item.startDate}" required />
+        <input type="datetime-local" id="todo-enddatetime" value="${item.endDate}" required />
+        <button type="submit" class="update btn btn-outline-dark">Update</button>
+      </form>
+    `;
+
+    itemDiv.innerHTML = itemHTML;
+
+    const updateForm = itemDiv.querySelector("#edit-todo-form");
+    updateForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const updatedTodo = {
+        name: updateForm.querySelector("#todo-name").value,
+        description: updateForm.querySelector("#todo-description").value,
+        startDate: updateForm.querySelector("#todo-startdatetime").value,
+        endDate: updateForm.querySelector("#todo-enddatetime").value,
+      };
+
+      updateItem(item, updatedTodo);
+    });
+
+    createEventListener();
+  }
+}
+
+
+function newItem(item) {
+  let itemDiv = document.querySelector(`.list [data-id="${item.id}"]`);
+
+  if (itemDiv) {
+    let itemHTML = `
+      <div class="col-1" id="item">
+        <div class="check">
+          <div data-id="${item.id}" class="check-mark ${item.status == "completed" ? "checked" : ""}">
+            <i class="fa-solid fa-check" style="color: #4624df"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="texto ${item.status == "completed" ? "checked" : ""}">
+          <span><b>Name:</b> ${item.name}</span>
+          <span><b>Description:</b> ${item.description}</span>
+          <span><b>StartDate:</b>  ${new Date(item.startDate).toLocaleString("en")}</span>
+          <span><b>EndDate:</b> ${new Date(item.endDate).toLocaleString("en")}</span>
+        </div>
+      </div>
+
+      <div class="col-1" id="botoes">
+        <div class="buttons">
+          <button class="edit-button" data-id="${item.id}"><i class="fa-solid fa-pen-to-square"></i></button>
+          <button class="delete-button" data-id="${item.id}"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      </div>
+    `;
+
+    itemDiv.innerHTML = itemHTML;
+
+    createEventListener();
+  }
+}
+
+function updateItem(item, updatedTodo) {
+  const itemDiv = document.querySelector(`.list [data-id="${item.id}"]`);
+
+  if (itemDiv) {
+    try {
+      const itemRef = doc(collection(db, "new-todo"), item.id);
+
+      updateDoc(itemRef, updatedTodo)
+        .then(() => {
+          // Revert back to displaying the item without the form
+          newItem(item);
+
+          // Re-fetch and display the items
+          getItems();
+        })
+        .catch((error) => {
+          console.error("Error updating document: ", error);
+        });
+    } catch (error) {
+      console.error("Error updating document: ", error);
+    }
+  }
+}
+
 function createEventListener() {
   let todoCheckMarks = document.querySelectorAll(".list .check-mark");
 
@@ -79,39 +173,16 @@ function createEventListener() {
     })
   });
 
-  let editButtons = document.querySelectorAll(".list .edit-button");
+  const editButtons = document.querySelectorAll(".list .edit-button");
 
-  editButtons.forEach((button) => {
-    button.addEventListener("click", function() {
-      const itemId = button.dataset.id;
-      const listItem = button.closest(".list");
-      const itemRef = doc(collection(db, "new-todo"), itemId);
+  editButtons.forEach((editButton) => {
+    editButton.addEventListener("click", function() {
+      const itemId = editButton.dataset.id;
+      const item = getItemById(itemId, items);
 
-      // Obter dados do documento
-      getDoc(itemRef)
-        .then((doc) => {
-          if (doc.exists) {
-            // Obter os campos do formulário
-            const nameInput = listItem.querySelector(".texto span:nth-child(1)");
-            const descriptionInput = listItem.querySelector(".texto span:nth-child(2)");
-            const startDatetimeInput = listItem.querySelector(".texto span:nth-child(3)");
-            const endDatetimeInput = listItem.querySelector(".texto span:nth-child(4)");
-
-            // Preencher os campos do formulário com os dados do documento
-            nameInput.textContent = `Name: ${doc.data().name}`;
-            descriptionInput.textContent = `Description: ${doc.data().description}`;
-            startDatetimeInput.textContent = `StartDate: ${new Date(doc.data().startDate).toLocaleString("en")}`;
-            endDatetimeInput.textContent = `EndDate: ${new Date(doc.data().endDate).toLocaleString("en")}`;
-
-            // Exibir o botão "Salvar" e ocultar o botão "Editar"
-            listItem.querySelector(".edit-button").style.display = "none";
-            listItem.querySelector(".delete-button").style.display = "none";
-            listItem.querySelector(".save-button").style.display = "inline-block";
-          }
-        })
-        .catch((error) => {
-          console.error("Error getting document: ", error);
-        });
+      if (item) {
+        editItem(item, items);
+      }
     });
   });
 
@@ -134,6 +205,16 @@ function createEventListener() {
         });
     });
   });
+}
+
+function getItemById(id, items) {
+  for (let i = 0; i < items.length; i++) {
+    if (items[i].id === id) {
+      return items[i];
+    }
+  }
+
+  return null;
 }
 
 function markCompleted(id) {
@@ -191,6 +272,7 @@ window.onload = () => {
     };
 
     try {
+
       await addDoc(collection(db, "new-todo"), {
         name: todo.name,
         description: todo.description,
