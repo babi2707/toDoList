@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(93deg, #000000, #00008B, #87CEFA, #eec89d, #e7a3f0, #af8dce, #8A2BE2, #3f0575, #000000);
+    background: linear-gradient(93deg, #000000, #00008B, #87CEFA, #87CEFA, #eec89d, #eec89d, #e7a3f0, #e7a3f0, #af8dce, #af8dce, #8A2BE2, #3f0575, #000000);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -97,7 +97,6 @@ h1 {
     transform: translateY(-1px);
     box-shadow: 0 0px 7px 0px rgb(0, 0, 0, 0.45);
     border-color: rgb(83, 83, 173);
-    background-color: rgba(20, 148, 148, 0.753);
 }
 
 #lista:first-of-type {
@@ -121,7 +120,6 @@ h1 {
     transform: translateY(-1px);
     box-shadow: 0 0px 7px 0px rgb(0, 0, 0, 0.45);
     border-color: rgb(83, 83, 173);
-    background-color: rgba(20, 148, 148, 0.753);
 }
 
 #lista:last-of-type {
