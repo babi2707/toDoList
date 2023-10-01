@@ -1,16 +1,16 @@
 // firebase.js
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
 import { getFirestore, collection, addDoc, onSnapshot, doc, getDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAeYXSaf7CLNCvdOXLNvOmb29D_UK9qqNk",
-  authDomain: "newtodo-776c3.firebaseapp.com",
-  projectId: "newtodo-776c3",
-  storageBucket: "newtodo-776c3.appspot.com",
-  messagingSenderId: "683413439169",
-  appId: "1:683413439169:web:499778a1bf3b4391680a40",
-  measurementId: "G-53YZC7Z9KG"
+  apiKey: "AIzaSyBcKKjbTEdgzMNSHD4VywapIwfQtCVv2A4",
+    authDomain: "todolist-6914b.firebaseapp.com",
+    projectId: "todolist-6914b",
+    storageBucket: "todolist-6914b.appspot.com",
+    messagingSenderId: "75921281373",
+    appId: "1:75921281373:web:30360b994439071aaf18b4",
+    measurementId: "G-D1E4CLG12K"
 };
 
 
