@@ -1,16 +1,16 @@
 // firebase.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
-import { getFirestore, collection, addDoc, onSnapshot, doc, getDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+import { getFirestore, collection, addDoc, onSnapshot, doc, getDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBcKKjbTEdgzMNSHD4VywapIwfQtCVv2A4",
-    authDomain: "todolist-6914b.firebaseapp.com",
-    projectId: "todolist-6914b",
-    storageBucket: "todolist-6914b.appspot.com",
-    messagingSenderId: "75921281373",
-    appId: "1:75921281373:web:30360b994439071aaf18b4",
-    measurementId: "G-D1E4CLG12K"
+  apiKey: "AIzaSyBtD-19ZTRHj7BY58hMsOzKRp0VR-p-2z0",
+    authDomain: "todolist-b2b6c.firebaseapp.com",
+    projectId: "todolist-b2b6c",
+    storageBucket: "todolist-b2b6c.appspot.com",
+    messagingSenderId: "98131185925",
+    appId: "1:98131185925:web:84868f07453554608c676c",
+    measurementId: "G-PV82LTR01D"
 };
 
 
